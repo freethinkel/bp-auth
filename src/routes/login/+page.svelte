@@ -15,7 +15,7 @@
 
 	const handleSubmit = (event: Event) => {
 		event.preventDefault();
-		authStore.onLogin();
+		authStore.handleSubmit();
 	};
 
 	onMount(() => {
@@ -98,11 +98,6 @@
 		& :global(label) {
 			width: 100%;
 		}
-	}
-	.error_message {
-		font-size: 0.8rem;
-		font-weight: 600;
-		color: var(--color-error);
 	}
 	.form__footer {
 		margin-top: var(--spacing-l);

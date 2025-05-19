@@ -6,6 +6,7 @@ import * as authStore from './auth.store';
 import { ERROR_MESSAGES } from '@/shared/contants/error-messages';
 import { showMessage } from '../snackbar';
 import { appStore } from '../app';
+import { sleep } from '@/shared/helpers/sleep';
 
 vi.mock('@/application/config', () => {
 	return { httpClient: new HttpClient('http://localhost:3000', mockFetch) };
@@ -37,7 +38,7 @@ describe('Auth store', () => {
 		authStore.changeForm('email')('user2@example.com');
 		authStore.changeForm('password')('$trongp@ssword1');
 
-		const promise = authStore.onLogin();
+		const promise = authStore.handleSubmit();
 		expect(get(authStore.loading)).toBe(false);
 		await promise;
 
@@ -53,7 +54,8 @@ describe('Auth store', () => {
 		authStore.changeForm('email')('notExisted@example.com');
 		authStore.changeForm('password')('random_password');
 
-		const promise = authStore.onLogin();
+		const promise = authStore.handleSubmit();
+		await sleep(0);
 		expect(get(authStore.loading)).toBe(true);
 		await promise;
 
@@ -68,8 +70,10 @@ describe('Auth store', () => {
 		authStore.changeForm('email')('user1@example.com');
 		authStore.changeForm('password')('$trongp@ssword1');
 
-		const promise = authStore.onLogin();
+		const promise = authStore.handleSubmit();
+		await sleep(0);
 		expect(get(authStore.loading)).toBe(true);
+
 		await promise;
 
 		expect(get(authStore.loading)).toBe(false);
@@ -83,7 +87,8 @@ describe('Auth store', () => {
 	});
 
 	it('Check the loading is not stucked', async () => {
-		const promise = authStore.onLogin();
+		const promise = authStore.handleSubmit();
+		await sleep(0);
 		expect(get(authStore.loading)).toBe(false);
 		await promise;
 		expect(get(authStore.loading)).toBe(false);

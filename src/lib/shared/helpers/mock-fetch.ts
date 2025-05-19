@@ -133,8 +133,6 @@ export const mockFetch = async (
 	const body = init?.body || (input instanceof Request ? input.body : undefined);
 	const signal = init?.signal || (input instanceof Request ? input.signal : undefined);
 
-	console.log('Mock fetch intercepted:', { url, method, signal: signal ? 'present' : 'none' });
-
 	try {
 		// API endpoint matching
 		if (url.endsWith('/api/login') && method === 'POST') {

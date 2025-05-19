@@ -5,14 +5,16 @@ import { showMessage } from '../snackbar';
 import type { UserData } from '@/shared/types/user';
 import { ERROR_MESSAGES } from '@/shared/contants/error-messages';
 import { appStore } from '../app';
+import { createPersistentStore } from '@/shared/helpers/persistent';
 
 export const loading = writable(false);
-export const authToken = writable('');
-export const authUserData = writable<UserData | null>(null);
+export const authToken = createPersistentStore('auth_token', '');
+export const authUserData = createPersistentStore<UserData | null>('auth_user_data', null);
 
 export const {
 	values: formValues,
 	change: changeForm,
+	handleSubmit,
 	errors
 } = createForm(
 	{
@@ -20,21 +22,19 @@ export const {
 		password: ''
 	},
 	{
-		clearErrorsOnChange: true
+		validators: {
+			email: (value) => (!/\w+@\w.\w/.test(value) ? ERROR_MESSAGES.invalidEmail : ''),
+			password: (value) => (!value ? ERROR_MESSAGES.required : '')
+		},
+		onSubmit: (values) => onLogin(values),
+		clearAllErrorsOnChange: true
 	}
 );
 
 export const abortController = writable(new AbortController());
 
-export const onLogin = async () => {
-	console.log('START');
+const onLogin = async ({ email, password }: { email: string; password: string }) => {
 	try {
-		const { email, password } = get(formValues);
-
-		if (!email || !password) {
-			return;
-		}
-
 		if (!get(appStore.isOnline)) {
 			showMessage({
 				id: Math.random(),

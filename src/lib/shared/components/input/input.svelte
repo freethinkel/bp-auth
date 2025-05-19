@@ -62,6 +62,8 @@
 			<button
 				type="button"
 				class="toggle-password-visible"
+				aria-controls="password"
+				aria-expanded={isPasswordShown}
 				onclick={(event) => {
 					isPasswordShown = !isPasswordShown;
 					event.preventDefault();

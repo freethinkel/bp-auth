@@ -36,12 +36,10 @@
 <style>
 	.loader {
 		--size: 20px;
-		--rotation: 0deg;
 		height: var(--size);
 		width: var(--size);
 		mask-image: conic-gradient(from 20deg, transparent, white);
-		animation: 0.8s linear loading infinite;
-		transform: scale(1.01) translate3d(0, 0, 0) rotate(var(--rotation));
+		animation: loading 0.8s steps(8) forwards infinite;
 		display: inline-flex;
 
 		& svg {
@@ -55,28 +53,10 @@
 
 	@keyframes loading {
 		0% {
-			--rotation: 0deg;
+			transform: rotate(0deg);
 		}
-		12% {
-			--rotation: 45deg;
-		}
-		25% {
-			--rotation: 90deg;
-		}
-		37% {
-			--rotation: 135deg;
-		}
-		50% {
-			--rotation: 180deg;
-		}
-		62% {
-			--rotation: 225deg;
-		}
-		75% {
-			--rotation: 270deg;
-		}
-		87% {
-			--rotation: 315deg;
+		100% {
+			transform: rotate(359deg);
 		}
 	}
 </style>

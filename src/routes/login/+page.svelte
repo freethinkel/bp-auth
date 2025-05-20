@@ -2,6 +2,7 @@
 	import { Button } from '@/shared/components/button';
 	import { Input } from '@/shared/components/input';
 	import { Loader } from '@/shared/components/loader';
+	import { ERROR_MESSAGES } from '@/shared/contants/error-messages';
 	import { authStore } from '@/stores/auth';
 	import { onDestroy, onMount } from 'svelte';
 	import { derived } from 'svelte/store';
@@ -11,7 +12,13 @@
 	const formValues = authStore.formValues;
 	const abortController = authStore.abortController;
 
-	const isFormInvalid = derived([errors], ([errors]) => Object.values(errors).some(Boolean));
+	const isButtonDisabled = derived([errors], ([errors]) =>
+		Object.values(errors).some((error) =>
+			[ERROR_MESSAGES.invalidEmail, ERROR_MESSAGES.userNotFound, ERROR_MESSAGES.required].includes(
+				error
+			)
+		)
+	);
 
 	const handleSubmit = (event: Event) => {
 		event.preventDefault();
@@ -27,7 +34,7 @@
 	});
 </script>
 
-<main>
+<main class="container">
 	<form on:submit={handleSubmit} class="card">
 		<Input
 			type="email"
@@ -57,7 +64,7 @@
 			<a href="/forgot-password">Forgot password?</a>
 		</div>
 		<div class="form__footer">
-			<Button type="submit" disabled={$loading || $isFormInvalid}>
+			<Button type="submit" disabled={$loading || $isButtonDisabled}>
 				{#if $loading}
 					<Loader delay={300} animationDirection="horizontal" />
 				{/if}
@@ -75,7 +82,6 @@
 		justify-content: center;
 		align-items: center;
 		min-height: inherit;
-		padding: var(--spacing-l);
 	}
 	form {
 		max-width: 400px;

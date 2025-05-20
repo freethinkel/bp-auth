@@ -23,7 +23,7 @@ export const {
 	},
 	{
 		validators: {
-			email: (value) => (!/\w+@\w.\w/.test(value) ? ERROR_MESSAGES.invalidEmail : ''),
+			email: (value) => (!/^\w+@\w+(\.\w+)?$/.test(value) ? ERROR_MESSAGES.invalidEmail : ''),
 			password: (value) => (!value ? ERROR_MESSAGES.required : '')
 		},
 		onSubmit: (values) => onLogin(values),
@@ -44,6 +44,7 @@ const onLogin = async ({ email, password }: { email: string; password: string })
 			return;
 		}
 
+		errors.set({});
 		loading.set(true);
 
 		const res = await httpClient.post<

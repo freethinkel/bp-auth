@@ -1,34 +1,34 @@
 <script lang="ts">
-  let { name = "", size = 20 } = $props();
+	let { name = '', size = 20 } = $props();
 
-  let svgContent = $state("");
+	let svgContent = $state('');
 
-  const loadIcon = async (name: string) => {
-    const module = await import(`./icons/${name}.svg?raw`);
-    svgContent = module.default;
-  };
+	const loadIcon = async (name: string) => {
+		const module = await import(`./icons/${name}.svg?raw`);
+		svgContent = module.default;
+	};
 
-  $effect(() => {
-    loadIcon(name);
-  });
+	$effect(() => {
+		loadIcon(name);
+	});
 </script>
 
 <div class="icon" style:--size="{size}px">
-  <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-  {@html svgContent}
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+	{@html svgContent}
 </div>
 
 <style>
-  .icon {
-    display: flex;
+	.icon {
+		display: flex;
 
-    & :global(svg) {
-      height: var(--size);
-      width: var(--size);
+		& :global(svg) {
+			height: var(--size);
+			width: var(--size);
 
-      & :global(path) {
-        fill: var(--color-title);
-      }
-    }
-  }
+			& :global(path) {
+				fill: var(--color-title);
+			}
+		}
+	}
 </style>

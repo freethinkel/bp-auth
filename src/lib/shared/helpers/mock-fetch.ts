@@ -1,6 +1,6 @@
 import { sleep } from './sleep';
 
-const USERS = [
+export const MOCK_USERS = [
 	{ email: 'user1@example.com', password: '$trongp@ssword1', name: 'Bernhard and Sons' },
 	{ email: 'user2@example.com', password: '$trongp@ssword2', name: 'Stroman Group' },
 	{ email: 'user3@example.com', password: '$trongp@ssword3', name: 'Kutch - Treutel' },
@@ -101,7 +101,7 @@ const mockLogin = async (body?: unknown, signal?: AbortSignal): Promise<Response
 	}
 
 	const credentials = JSON.parse(body as string);
-	const foundUser = USERS.find(
+	const foundUser = MOCK_USERS.find(
 		(user) => user.email === credentials.email && user.password === credentials.password
 	);
 

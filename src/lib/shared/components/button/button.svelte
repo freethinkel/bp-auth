@@ -20,7 +20,8 @@
 <style lang="postcss">
 	button {
 		--bg-color: var(--color-accent);
-		color: var(--color-title);
+		--color-loader: oklch(1 0 0);
+		color: oklch(1 0 0);
 		appearance: none;
 		height: 48px;
 		display: flex;

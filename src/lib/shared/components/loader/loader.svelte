@@ -47,7 +47,7 @@
 			height: 100%;
 		}
 		& svg path {
-			fill: var(--color-title);
+			fill: var(--color-loader, var(--color-title));
 		}
 	}
 

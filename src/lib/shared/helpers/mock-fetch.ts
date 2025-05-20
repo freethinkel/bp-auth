@@ -141,7 +141,7 @@ export const mockFetch = async (
 	} catch (error) {
 		// Handle abort errors
 		if (error instanceof DOMException && error.name === 'AbortError') {
-			console.warn('Mock fetch request aborted:', url);
+			console.info('Mock fetch request aborted:', url);
 			throw error; // Rethrow to match native fetch behavior
 		}
 		throw error; // Rethrow other errors

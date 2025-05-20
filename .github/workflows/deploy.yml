@@ -31,6 +31,12 @@ jobs:
         run: |
           pnpm build
 
+      - name: Tests and Lint
+        run: |
+          pnpm lint
+          pnpm check
+          pnpm test
+
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v3
         with:

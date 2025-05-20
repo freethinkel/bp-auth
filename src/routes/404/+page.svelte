@@ -1,13 +1,18 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import { base } from '$app/paths';
 	import { onDestroy, onMount } from 'svelte';
 
 	onMount(() => {
-		document.body.classList.add('body_404');
+		if (browser) {
+			document.body.classList.add('body_404');
+		}
 	});
 
 	onDestroy(() => {
-		document.body.classList.remove('body_404');
+		if (browser) {
+			document.body.classList.remove('body_404');
+		}
 	});
 </script>
 

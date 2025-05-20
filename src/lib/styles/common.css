@@ -198,3 +198,8 @@ code {
 	background-size: cover;
 	background-position: center;
 }
+
+.page {
+	min-height: 100dvh;
+	padding: var(--spacing-l) 0;
+}

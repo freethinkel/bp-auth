@@ -22,6 +22,10 @@ export const createForm = <T extends Record<string, string | number>>(
 			writable(initialValues);
 			errors.set({});
 		},
+		reset: () => {
+			errors.set({});
+			values.set(initialValues);
+		},
 		handleSubmit: async () => {
 			try {
 				const formValues = get(values);

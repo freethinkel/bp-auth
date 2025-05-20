@@ -38,6 +38,7 @@
 
 	onDestroy(() => {
 		$abortController.abort();
+		authStore.reset();
 	});
 </script>
 

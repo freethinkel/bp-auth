@@ -8,6 +8,7 @@ import { appStore } from '../app';
 import { createPersistentStore } from '@/shared/helpers/persistent';
 import { goto } from '$app/navigation';
 import { base } from '$app/paths';
+import { HttpResponse } from '@/shared/helpers/http-client';
 
 export const loading = writable(false);
 export const authToken = createPersistentStore('auth_token', '');
@@ -17,7 +18,8 @@ export const {
 	values: formValues,
 	change: changeForm,
 	handleSubmit,
-	errors
+	errors,
+	reset
 } = createForm(
 	{
 		email: '',
@@ -55,28 +57,31 @@ const onLogin = async ({ email, password }: { email: string; password: string })
 				user: UserData;
 				token: string;
 			}
-		>('/api/login', { email, password });
-
-		if (!res.ok) {
-			if (res.status === 401) {
-				errors.set({ email: ERROR_MESSAGES.userNotFound, password: ERROR_MESSAGES.userNotFound });
-				return;
-			}
-
-			showMessage({
-				id: Math.random(),
-				title: 'Something wrong, try again later',
-				kind: 'error'
-			});
-			return;
-		}
+		>('/api/login', { email, password }, { signal: get(abortController).signal });
 
 		authUserData.set(res.data.user);
 		authToken.set(res.data.token);
 
 		goto(`${base}/app`);
+	} catch (err) {
+		if (!(err instanceof HttpResponse)) {
+			return;
+		}
 
-		console.log(res);
+		if (err.ok) {
+			return;
+		}
+
+		if (err.status === 401) {
+			errors.set({ email: ERROR_MESSAGES.userNotFound, password: ERROR_MESSAGES.userNotFound });
+			return;
+		}
+
+		showMessage({
+			id: Math.random(),
+			title: 'Something wrong, try again later',
+			kind: 'error'
+		});
 	} finally {
 		loading.set(false);
 	}

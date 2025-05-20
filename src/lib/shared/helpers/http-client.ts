@@ -3,11 +3,13 @@ export type RequestOptions = {
 	queryParams?: Record<string, string>;
 };
 
-export type HttpResponse<T> = {
-	status: number;
-	ok: boolean;
-	data: T;
-};
+export class HttpResponse<T> {
+	constructor(
+		public readonly status: number,
+		public readonly ok: boolean,
+		public readonly data: T
+	) {}
+}
 
 export class HttpClient {
 	constructor(
@@ -29,32 +31,25 @@ export class HttpClient {
 	}
 
 	private async _buildResponse<T>(response: Promise<Response>): Promise<HttpResponse<T>> {
+		const res = await response;
+		console.log('rr', res);
+
+		const text = await res.text();
+		let data: T;
 		try {
-			const res = await response;
-
-			const text = await res.text();
-			let data: T;
-			try {
-				data = JSON.parse(text);
-			} catch (err) {
-				data = text as T;
-				console.error(err);
-			}
-
-			return {
-				status: res.status,
-				ok: res.ok,
-				data
-			};
+			data = JSON.parse(text);
 		} catch (err) {
+			data = text as T;
 			console.error(err);
-
-			throw {
-				status: 0,
-				data: err,
-				ok: false
-			};
 		}
+
+		const payload = new HttpResponse(res.status, res.ok, data);
+
+		if (Math.floor(res.status / 100) === 2) {
+			return payload;
+		}
+
+		throw payload;
 	}
 
 	get<T>(url: string, options?: RequestOptions): Promise<HttpResponse<T>> {
@@ -67,8 +62,9 @@ export class HttpClient {
 	}
 
 	post<B, T>(url: string, body?: B, options?: RequestOptions): Promise<HttpResponse<T>> {
+		console.log(this._buildUrl(url).toString());
 		return this._buildResponse(
-			this.fetch(this._buildUrl(url), {
+			this.fetch(this._buildUrl(url).toString(), {
 				method: 'POST',
 				body: JSON.stringify(body),
 				headers: {

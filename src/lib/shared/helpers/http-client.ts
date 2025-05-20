@@ -32,7 +32,6 @@ export class HttpClient {
 
 	private async _buildResponse<T>(response: Promise<Response>): Promise<HttpResponse<T>> {
 		const res = await response;
-		console.log('rr', res);
 
 		const text = await res.text();
 		let data: T;
@@ -62,7 +61,6 @@ export class HttpClient {
 	}
 
 	post<B, T>(url: string, body?: B, options?: RequestOptions): Promise<HttpResponse<T>> {
-		console.log(this._buildUrl(url).toString());
 		return this._buildResponse(
 			this.fetch(this._buildUrl(url).toString(), {
 				method: 'POST',

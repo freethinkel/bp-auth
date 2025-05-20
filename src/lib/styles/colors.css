@@ -10,7 +10,7 @@
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		--color-accent: oklch(0.67 0.14 261.35);
+		--color-accent: oklch(0.62 0.135 255.35);
 		--color-title: oklch(1 0 0);
 		--color-text: oklch(from var(--color-title) 0.7 c h);
 		--color-link: oklch(0.75 0.2068 248.82);

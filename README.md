@@ -1,35 +1,81 @@
-# Login page
+# BPAuth - Authentication System Demo
 
-## Developing
+A modern authentication system built with Svelte demonstrating best practices for user login.
+
+## Features
+
+- User authentication with email and password
+- Responsive design
+- Form validation
+- Error handling
+- Tests
+
+## Getting Started
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/freethinkel/bp-auth.git
+cd bp-auth
+
+# Install dependencies
+pnpm install
+```
+
+### Development
+
+Start the development server:
 
 ```bash
 pnpm dev
 ```
 
-## Building
+This will start the development server at `http://localhost:5173` (or another available port).
+
+### Building for Production
 
 ```bash
-npm run build
-
-
+pnpm build
 ```
 
-# How to
+The built application will be in the `build` directory.
 
-Task list
+### Preview Production Build
 
-- [ ] Browser theme statusbar
-- [ ] Prepare favicon
-
-## Login
-
-Exist users
-
-```js
-	{ email: 'user1@example.com', password: '$trongp@ssword1', name: 'Bernhard and Sons' },
-	{ email: 'user2@example.com', password: '$trongp@ssword2', name: 'Stroman Group' },
-	{ email: 'user3@example.com', password: '$trongp@ssword3', name: 'Kutch - Treutel' },
-	{ email: 'user4@example.com', password: '$trongp@ssword4', name: 'Pollich, Hermann and Bradtke' },
-	{ email: 'user5@example.com', password: '$trongp@ssword5', name: 'Schoen Group' },
-	{ email: 'user5@example.com', password: '$trongp@ssword6', name: 'Hansen and Sons' }
+```bash
+pnpm preview
 ```
+
+## Usage Guide
+
+### Demo Accounts
+
+You can use any of these demo accounts to test the authentication system:
+
+| Email             | Password        | Name                         |
+| ----------------- | --------------- | ---------------------------- |
+| user1@example.com | $trongp@ssword1 | Bernhard and Sons            |
+| user2@example.com | $trongp@ssword2 | Stroman Group                |
+| user3@example.com | $trongp@ssword3 | Kutch - Treutel              |
+| user4@example.com | $trongp@ssword4 | Pollich, Hermann and Bradtke |
+| user5@example.com | $trongp@ssword5 | Schoen Group                 |
+| user6@example.com | $trongp@ssword6 | Hansen and Sons              |
+
+### Pages
+
+- **Home**: Overview and demo credentials
+- **Login**: Email and password authentication
+- **Sign Up**: Registration for new users (Unimplemented)
+- **Forgot Password**: Password recovery workflow (Unimplemented)
+- **App**: Protected route that requires authentication
+
+## Technical Details
+
+This project demonstrates:
+
+- Client-side form validation
+- Simulated API interactions
+- Proper error handling
+- Responsive design principles
+- Accessibility considerations

@@ -4,8 +4,8 @@
 
 <div class="container">
 	<h1>Welcome to AuthPage</h1>
-	<p>The login page made using best bractices</p>
-	<p>You can any of the users to do mock login:</p>
+	<p>A secure authentication system built with best practices</p>
+	<p>You can use any of these demo accounts to test the login functionality:</p>
 
 	<table>
 		<thead>

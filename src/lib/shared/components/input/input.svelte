@@ -62,8 +62,9 @@
 			<button
 				type="button"
 				class="toggle-password-visible"
-				aria-controls="password"
+				aria-label={isPasswordShown ? 'Hide password' : 'Show password'}
 				aria-expanded={isPasswordShown}
+				title={isPasswordShown ? 'Hide password' : 'Show password'}
 				onclick={(event) => {
 					isPasswordShown = !isPasswordShown;
 					event.preventDefault();
@@ -72,6 +73,7 @@
 					event.stopPropagation();
 				}}
 			>
+				<span class="visually-hidden">{isPasswordShown ? 'Hide password' : 'Show password'}</span>
 				<Icon name={isPasswordShown ? 'eye-slash' : 'eye'} />
 			</button>
 		{/if}

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { Button } from '@/shared/components/button';
 	import { Input } from '@/shared/components/input';
 	import { Loader } from '@/shared/components/loader';
@@ -10,6 +11,7 @@
 	const errors = authStore.errors;
 	const loading = authStore.loading;
 	const formValues = authStore.formValues;
+	const authToken = authStore.authToken;
 	const abortController = authStore.abortController;
 
 	const isButtonDisabled = derived([errors], ([errors]) =>
@@ -27,12 +29,20 @@
 
 	onMount(() => {
 		$abortController = new AbortController();
+
+		if ($authToken) {
+			goto('/app', { replaceState: true });
+		}
 	});
 
 	onDestroy(() => {
 		$abortController.abort();
 	});
 </script>
+
+<svelte:head>
+	<title>Demo authorization - Login</title>
+</svelte:head>
 
 <main class="container">
 	<form on:submit={handleSubmit} class="card">

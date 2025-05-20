@@ -6,6 +6,7 @@ import type { UserData } from '@/shared/types/user';
 import { ERROR_MESSAGES } from '@/shared/contants/error-messages';
 import { appStore } from '../app';
 import { createPersistentStore } from '@/shared/helpers/persistent';
+import { goto } from '$app/navigation';
 
 export const loading = writable(false);
 export const authToken = createPersistentStore('auth_token', '');
@@ -72,8 +73,16 @@ const onLogin = async ({ email, password }: { email: string; password: string })
 		authUserData.set(res.data.user);
 		authToken.set(res.data.token);
 
+		goto('/app');
+
 		console.log(res);
 	} finally {
 		loading.set(false);
 	}
+};
+
+export const logout = () => {
+	authToken.set('');
+	authUserData.set(null);
+	goto('/login', { replaceState: true });
 };

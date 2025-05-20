@@ -160,3 +160,34 @@ table {
 		}
 	}
 }
+
+pre:has(code) {
+	background: oklch(from var(--color-text) l c h / 10%);
+	border-radius: var(--radius);
+	padding: var(--spacing-m);
+	overflow: auto;
+}
+
+code {
+	display: block;
+	min-width: 100%;
+	width: max-content;
+	color: var(--color-title);
+	font-family: 'Martian Mono', 'Fira Code', monospace;
+}
+
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	border: 0;
+	padding: 0;
+	top: -1000px;
+	left: -1000px;
+
+	white-space: nowrap;
+	clip-path: inset(100%);
+	clip: rect(0 0 0 0);
+	overflow: hidden;
+}

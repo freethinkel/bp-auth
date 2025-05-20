@@ -27,6 +27,7 @@ jobs:
 
       - name: build
         env:
+          VITE_API_URL: 'https://api.example.com'
           BASE_PATH: '/${{ github.event.repository.name }}'
         run: |
           pnpm build

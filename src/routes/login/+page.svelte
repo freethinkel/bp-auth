@@ -32,7 +32,7 @@
 		$abortController = new AbortController();
 
 		if ($authToken) {
-			goto('/app', { replaceState: true });
+			goto(`${base}/app`, { replaceState: true });
 		}
 	});
 

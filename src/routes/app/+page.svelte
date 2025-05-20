@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { base } from '$app/paths';
 	import { Button } from '@/shared/components/button';
 	import { authStore } from '@/stores/auth';
 	import { onMount } from 'svelte';
@@ -9,7 +10,7 @@
 
 	onMount(() => {
 		if (!$authToken) {
-			goto('/login', { replaceState: true });
+			goto(`${base}/login`, { replaceState: true });
 		}
 	});
 </script>

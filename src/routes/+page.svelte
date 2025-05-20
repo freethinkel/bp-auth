@@ -5,7 +5,7 @@
 
 <div class="page">
 	<div class="container">
-		<h1>Welcome to BPAuth</h1>
+		<h1>Welcome to login demo app</h1>
 		<p>You can use any of these demo accounts to test the login functionality:</p>
 
 		<table>

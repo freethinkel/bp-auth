@@ -1,10 +1,16 @@
 import { vi } from 'vitest';
 
-// @ts-expect-error mock
-globalThis.navigator = { onLine: true };
+console.log(globalThis.navigator.onLine);
 
-// @ts-expect-error mock
-globalThis.window = {
-	addEventListener: vi.fn(),
-	navigator: globalThis.navigator
-};
+if (!('navigator' in globalThis)) {
+	// @ts-expect-error mock
+	globalThis.navigator = { onLine: true };
+}
+
+if (!('window' in globalThis)) {
+	// @ts-expect-error mock
+	globalThis.window = {
+		addEventListener: vi.fn(),
+		navigator: globalThis.navigator
+	};
+}

@@ -5,8 +5,7 @@
 
 <div class="page">
 	<div class="container">
-		<h1>Welcome to AuthPage</h1>
-		<p>A secure authentication system built with best practices</p>
+		<h1>Welcome to BPAuth</h1>
 		<p>You can use any of these demo accounts to test the login functionality:</p>
 
 		<table>

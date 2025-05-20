@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { base } from '$app/paths';
 	import { Button } from '@/shared/components/button';
 	import { Input } from '@/shared/components/input';
 	import { Loader } from '@/shared/components/loader';
@@ -71,7 +72,7 @@
 				required
 			/>
 
-			<a href="/forgot-password">Forgot password?</a>
+			<a href="{base}/forgot-password">Forgot password?</a>
 		</div>
 		<div class="form__footer">
 			<Button type="submit" disabled={$loading || $isButtonDisabled}>
@@ -81,7 +82,7 @@
 				Sign in
 			</Button>
 			<hr />
-			<a href="/sign-up">Sign up</a>
+			<a href="{base}/sign-up">Sign up</a>
 		</div>
 	</form>
 </main>

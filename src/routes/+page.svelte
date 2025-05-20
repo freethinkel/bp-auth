@@ -1,4 +1,5 @@
 <script>
+	import { base } from '$app/paths';
 	import { MOCK_USERS } from '@/shared/helpers/mock-fetch';
 </script>
 
@@ -24,5 +25,5 @@
 		</tbody>
 	</table>
 	<br />
-	<a href="/login">Go to Login page</a>
+	<a href="{base}/login">Go to Login page</a>
 </div>

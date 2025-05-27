@@ -1,9 +1,10 @@
 :root {
 	--font-family:
-		'SF Pro Rounded', '.SF Pro Rounded', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-		Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+		'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+		Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	--header-font-family: 'Instrument Serif', serif;
 	--radius: 5px;
-	--font-size: 17px;
+	--font-size: 16px;
 
 	--shadow-1: oklch(0 0 0 / 0.05) 0px 0px 0px 1px;
 
@@ -47,7 +48,8 @@ h4,
 h5,
 h6 {
 	color: var(--color-title);
-	font-family: inherit;
+	font-family: var(--header-font-family);
+	font-weight: 500;
 }
 
 button,
